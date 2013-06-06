@@ -1,6 +1,12 @@
 <div>
+  <h2>Closed predictions</h2>
+  <p ng-repeat="prediction in predictions">
+  {{prediction.title}}: {{prediction.outcome}}
+  </p>
+
   <h2>Users</h2>
   <p ng-repeat="user in users">
   {{user}}: {{user2score[user]}}
   </p>
+
 </div>

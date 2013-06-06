@@ -54,8 +54,6 @@ function Main($scope) {
 
     });
 
-    console.log(user2score);
-
     $scope.users = users;
     $scope.user2score = user2score;
 }
