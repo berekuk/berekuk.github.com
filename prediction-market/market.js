@@ -18,6 +18,15 @@ function Main($scope) {
                 { user: 'ropewalker', value: 10 }
             ],
             outcome: false
+        },
+        {
+            title: 'Star Trek Into Darkness соберет $250M к 10-му июня',
+            bets: [
+                { user: 'mmcleric', value: 70 },
+                { user: 'kkapp', value: 90 },
+                { user: 'ropewalker', value: 70 }
+            ],
+            outcome: false
         }
     ];
 
