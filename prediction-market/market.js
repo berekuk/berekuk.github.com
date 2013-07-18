@@ -27,7 +27,16 @@ function Main($scope) {
                 { user: 'ropewalker', value: 70 }
             ],
             outcome: false
-        }
+        },
+        {
+            title: 'Навальному вынесут обвинительный приговор 18 июля 2013',
+            bets: [
+                { user: 'bessarabov', value: 51 },
+                { user: 'mmcleric', value: 75 },
+                { user: 'ropewalker', value: 60 }
+            ],
+            outcome: true
+        }        
     ];
 
     var users = _.uniq(
