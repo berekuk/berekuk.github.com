@@ -36,7 +36,19 @@ function Main($scope) {
                 { user: 'ropewalker', value: 60 }
             ],
             outcome: true
-        }        
+        },
+        {
+            title: 'Armikrog соберёт > $2m',
+            bets: [
+                { user: 'kkapp', value: 90 },
+                { user: 'andrewkhitry', value: 70 },
+                { user: 'payalnik', value: 60 },
+                { user: 'mmcleric', value: 20 },
+                { user: 'mazoo', value: 25 },
+                { user: 'mmcleric', value: 1 }
+            ],
+            outcome: false
+        }
     ];
 
     var users = _.uniq(
