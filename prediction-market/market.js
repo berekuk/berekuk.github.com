@@ -56,6 +56,14 @@ function Main($scope) {
                 { user: 'bessarabov', value: 99 }
             ],
             outcome: false
+        },
+        {
+            title: 'Гермиону воскресят к концу 96-й главы HPMoR',
+            bets: [
+                { user: 'elspet', value: 40 },
+                { user: 'andrewkhitry', value: 1 }
+            ],
+            outcome: false
         }
     ];
 
