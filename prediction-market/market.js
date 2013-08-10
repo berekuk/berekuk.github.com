@@ -48,6 +48,14 @@ function Main($scope) {
                 { user: 'mmcleric', value: 1 }
             ],
             outcome: false
+        },
+        {
+            title: 'Кипяченая вода зацветет к 10-му августа',
+            bets: [
+                { user: 'mmcleric', value: 20 },
+                { user: 'bessarabov', value: 99 }
+            ],
+            outcome: false
         }
     ];
 
