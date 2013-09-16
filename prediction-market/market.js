@@ -64,6 +64,15 @@ function Main($scope) {
                 { user: 'andrewkhitry', value: 1 }
             ],
             outcome: false
+        },
+        {
+            title: 'Андрей Хитрый хотя бы один раз был в очках на встрече LW или созвоне старейшин',
+            bets: [
+                { user: 'varman', value: 30 },
+                { user: 'mmcleric', value: 60 },
+                { user: 'bt2901', value: 75 }
+            ],
+            outcome: true
         }
     ];
 
