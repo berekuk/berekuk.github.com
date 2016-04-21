@@ -1,7 +1,7 @@
-.tpw_cont .b-pro-wiget__date {
+#tpw_cont .b-pro-wiget__date span {
   font-size: 18px;
   font-weight: bold;
 }
-.tpw_cont .b-short-description {
+#tpw_cont .b-short-description {
   font-size: 18px;
 }
