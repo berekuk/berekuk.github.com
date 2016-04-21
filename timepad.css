@@ -2,12 +2,16 @@
   font-size: 18px;
   font-weight: bold;
   font-style: italic;
+  font-family: 'Georgia', serif;
 }
 .b-short-description {
   font-size: 18px;
   line-height: 1.55;
   font-family: 'Georgia', serif;
 }
-.tpf_event_link {
+.tpw_event_link {
   font-size: 18px;
+  font-family: 'Open Sans', serif;
+  font-weight: bold;
+  padding: 12px 14px;
 }
