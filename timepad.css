@@ -1,7 +1,13 @@
-#tpw_cont .b-pro-wiget__date span {
+.b-pro-wiget__date span {
   font-size: 18px;
   font-weight: bold;
+  font-style: italic;
 }
-#tpw_cont .b-short-description {
+.b-short-description {
+  font-size: 18px;
+  line-height: 1.55;
+  font-family: 'Georgia', serif;
+}
+.tpf_event_link {
   font-size: 18px;
 }
