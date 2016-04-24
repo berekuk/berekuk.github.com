@@ -1,0 +1,178 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <style>
+   main {
+     margin: 0 auto;
+     max-width: 800px;
+   }
+   input {
+     height: 30px;
+     display: block;
+     font-size: 24px;
+     width: 500px;
+     margin-bottom: 10px;
+   }
+   label {
+     font-size: 18px;
+     color: #333;
+     text-align: center;
+   }
+   button {
+     background-color: #f8f8f8;
+     border: 1px solid #333;
+     border-radius: 3px;
+     cursor: pointer;
+     display: block;
+     font-size: 24px;
+     padding: 4px 8px;
+     margin-bottom: 30px;
+   }
+   button:hover {
+     background-color: white;
+   }
+
+   .end-debate, .result {
+     display: none;
+   }
+
+   .labeled {
+     margin-bottom: 10px;
+   }
+   .labeled > div {
+     font-size: 24px;
+   }
+   .result.right .outcome, .result.right .new-average {
+     color: green;
+   }
+   .result.wrong .outcome, .result.wrong .new-average {
+     color: red;
+   }
+   .new-average {
+     font-weight: bold;
+   }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="initial">
+      <label>Изначальные ответы:</label>
+      <input id="initial-answers" type="text" pattern="^[\d\s]+$"/>
+      <button>Начать обсуждение</button>
+    </div>
+
+    <div class="end-debate">
+      <label>Ответ капитана:</label>
+      <input id="captain-answer" type="number" />
+
+      <label>Настоящий ответ:</label>
+      <input id="real-answer" type="number" />
+
+      <button>Подвести итоги</button>
+    </div>
+
+    <div class="result">
+      <div class="labeled">
+        <label>Наиболее точная оценка:</label>
+        <div class="closest-answer"></div>
+      </div>
+
+      <div class="labeled">
+        <label>Изначальная медиана:</label>
+        <div class="old-average"></div>
+      </div>
+
+      <div class="labeled">
+        <label>Ответ капитана:</label>
+        <div class="new-average"></div>
+      </div>
+
+      <div class="labeled">
+        <label>Итого:</label>
+        <div class="outcome"></div>
+      </div>
+    </div>
+  </main>
+  <script>
+   function $(selector) {
+     return document.querySelector(selector);
+   };
+   function $$(el, selector) {
+     return el.querySelector(selector);
+   }
+   function reveal(el) {
+     el.style.display = "block";
+   };
+   function hide(el) {
+     el.style.display = "none";
+   };
+   function delta(a, b) {
+     return Math.abs(a - b);
+   }
+   function median(list) {
+     var sorted = list.concat().sort(function (a, b) { return a - b });
+     if (sorted.length % 2 === 1) {
+       return sorted[Math.floor(sorted.length / 2)];
+     } else {
+       return (
+         sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]
+        ) / 2;
+     }
+   }
+   function average(list) {
+     return list.reduce(function (a, b) { return a + b }) / list.length;
+   }
+
+   var initialEl = $(".initial");
+   $$(initialEl, "button").onclick = function () {
+     reveal($(".end-debate"));
+   };
+
+   var endDebateEl = $(".end-debate");
+   $$(endDebateEl, "button").onclick = function () {
+     var initialAnswers = $("#initial-answers").value.trim().split(/\s+/).map(
+       function (a) {
+         return parseFloat(a);
+       }
+     );
+     var captainAnswer = parseFloat($("#captain-answer").value);
+     var realAnswer = parseFloat($("#real-answer").value);
+
+     var minDelta = undefined;
+     var minId = undefined;
+     for (var i = 0; i < initialAnswers.length; i++) {
+       if (minDelta === undefined || delta(initialAnswers[i], realAnswer) < minDelta) {
+         minId = i;
+         minDelta = delta(initialAnswers[i], realAnswer);
+       }
+     }
+     var closestAnswer = initialAnswers[minId];
+
+     var resultEl = $(".result");
+     $$(resultEl, ".closest-answer").innerHTML = closestAnswer;
+
+     var oldAverage = median(initialAnswers);
+     $$(resultEl, ".old-average").innerHTML = oldAverage;
+
+     var captainAnswerEl = $$(resultEl, ".new-average");
+     captainAnswerEl.innerHTML = captainAnswer;
+
+     var originalDelta = delta(oldAverage, realAnswer);
+     var finalDelta = delta(captainAnswer, realAnswer);
+     var teamWon = finalDelta < originalDelta;
+     resultEl.classList.remove(teamWon ? "wrong" : "right");
+     resultEl.classList.add(teamWon ? "right" : "wrong");
+
+     if (teamWon) {
+       var closer = Math.round(10 * (originalDelta - finalDelta) / originalDelta);
+       $(".outcome").innerHTML = "+" + closer + " всем, кроме предателя.";
+     }
+     else {
+       var farther = Math.min(Math.round(10 * (finalDelta - originalDelta) / originalDelta), 10);
+       $(".outcome").innerHTML = "+" + farther + " предателю.";
+     }
+
+     reveal(resultEl);
+   };
+  </script>
+</body>
